@@ -1,0 +1,201 @@
+bmsce@bmsce-Precision-T1700:~$ cd cassandra/apache-cassandra-3.11.0/
+bmsce@bmsce-Precision-T1700:~/cassandra/apache-cassandra-3.11.0~$ cd bin
+bmsce@bmsce-Precision-T1700:~/cassandra/apache-cassandra-3.11.0/bin$ ./cqlsh
+Connected to Test Cluster at 127.0.0.1:9042.
+[cqlsh 5.0.1 | Cassandra 3.11.4 | CQL spec 3.4.4 | Native protocol v4]
+Use HELP for help.
+cqlsh> CREATE KEYSPACE students WITH REPLICATION={
+   ... CREATE KEYSPACE students WITH REPLICATION=
+[1]+  Stopped                 ./cqlsh
+bmsce@bmsce-Precision-T1700:~/cassandra/apache-cassandra-3.11.0/bin$ ^C
+bmsce@bmsce-Precision-T1700:~/cassandra/apache-cassandra-3.11.0/bin$ CREATE KEYSPACE students WITH REPLICATION={'class':'SimpleStratergy','replication_factor':1};
+CREATE: command not found
+bmsce@bmsce-Precision-T1700:~/cassandra/apache-cassandra-3.11.0/bin$ cqlsh>CREATE KEYSPACE students WITH REPLICATION={
+Usage: cqlsh.py [options] [host [port]]
+
+cqlsh.py: error: 'students' is not a valid port number.
+bmsce@bmsce-Precision-T1700:~/cassandra/apache-cassandra-3.11.0/bin$ ‘class’:’SimpleStrategy’,
+‘class’:’SimpleStrategy’,: command not found
+bmsce@bmsce-Precision-T1700:~/cassandra/apache-cassandra-3.11.0/bin$ ‘replication_factor’:1 };^C
+bmsce@bmsce-Precision-T1700:~/cassandra/apache-cassandra-3.11.0/bin$ CREATE KEYSPACE students WITH REPLICATION={'class':'SimpleStratergy','replication_factor':1};
+CREATE: command not found
+bmsce@bmsce-Precision-T1700:~/cassandra/apache-cassandra-3.11.0/bin$ ./cqlsh
+Connected to Test Cluster at 127.0.0.1:9042.
+[cqlsh 5.0.1 | Cassandra 3.11.4 | CQL spec 3.4.4 | Native protocol v4]
+Use HELP for help.
+cqlsh> cqlsh>CREATE KEYSPACE students WITH REPLICATION={
+   ... ‘class’:’SimpleStrategy’,
+Invalid syntax at line 2, char 1
+  ‘class’:’SimpleStrategy’,
+  ^
+cqlsh> CREATE KEYSPACE students WITH REPLICATION={'class':'SimpleStratergy','replication_factor':1};
+ConfigurationException: Unable to find replication strategy class 'org.apache.cassandra.locator.SimpleStratergy'
+cqlsh> CREATE KEYSPACE students WITH REPLICATION={'class':'SimpleStrategy','replication_factor':1};
+AlreadyExists: Keyspace 'students' already exists
+cqlsh> CREATE KEYSPACE newstudents WITH REPLICATION={'class':'SimpleStrategy','replication_factor':1};
+cqlsh> DESCRIBE KEYSPACES;
+
+students       system_auth  newstudents         system_traces
+system_schema  system       system_distributed
+
+cqlsh> SELECT * FROM system.schema_keyspaces;
+InvalidRequest: Error from server: code=2200 [Invalid query] message="unconfigured table schema_keyspaces"
+cqlsh> SELECT * FROM system_schema.keyspaces;
+
+ keyspace_name      | durable_writes | replication
+--------------------+----------------+-------------------------------------------------------------------------------------
+        system_auth |           True | {'class': 'org.apache.cassandra.locator.SimpleStrategy', 'replication_factor': '1'}
+      system_schema |           True |                             {'class': 'org.apache.cassandra.locator.LocalStrategy'}
+        newstudents |           True | {'class': 'org.apache.cassandra.locator.SimpleStrategy', 'replication_factor': '1'}
+ system_distributed |           True | {'class': 'org.apache.cassandra.locator.SimpleStrategy', 'replication_factor': '3'}
+             system |           True |                             {'class': 'org.apache.cassandra.locator.LocalStrategy'}
+      system_traces |           True | {'class': 'org.apache.cassandra.locator.SimpleStrategy', 'replication_factor': '2'}
+           students |           True | {'class': 'org.apache.cassandra.locator.SimpleStrategy', 'replication_factor': '1'}
+
+(7 rows)
+cqlsh> USE students;
+cqlsh:students> 
+cqlsh:students> cd ..
+            ... 
+            ... 
+            ... 
+cqlsh:students> cd\
+Invalid syntax at line 1, char 3
+  cd\
+    ^
+cqlsh:students> exit
+bmsce@bmsce-Precision-T1700:~/cassandra/apache-cassandra-3.11.0/bin$ ./cqlsh
+Connected to Test Cluster at 127.0.0.1:9042.
+[cqlsh 5.0.1 | Cassandra 3.11.4 | CQL spec 3.4.4 | Native protocol v4]
+Use HELP for help.
+cqlsh> USE newstudents;
+cqlsh:newstudents> create table Student_Info(RollNo int PRIMARY KEY,StudName text,
+               ... DateofJoning timestamp,LastExamPercent double);
+cqlsh:newstudents> DESCRIBE TABLES;
+
+student_info
+
+cqlsh:newstudents> DESCRIBE TABLE student_info;
+
+CREATE TABLE newstudents.student_info (
+    rollno int PRIMARY KEY,
+    dateofjoning timestamp,
+    lastexampercent double,
+    studname text
+) WITH bloom_filter_fp_chance = 0.01
+    AND caching = {'keys': 'ALL', 'rows_per_partition': 'NONE'}
+    AND comment = ''
+    AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy', 'max_threshold': '32', 'min_threshold': '4'}
+    AND compression = {'chunk_length_in_kb': '64', 'class': 'org.apache.cassandra.io.compress.LZ4Compressor'}
+    AND crc_check_chance = 1.0
+    AND dclocal_read_repair_chance = 0.1
+    AND default_time_to_live = 0
+    AND gc_grace_seconds = 864000
+    AND max_index_interval = 2048
+    AND memtable_flush_period_in_ms = 0
+    AND min_index_interval = 128
+    AND read_repair_chance = 0.0
+    AND speculative_retry = '99PERCENTILE';
+
+cqlsh:newstudents> BEGIN BATCH
+               ... INSERT INTO
+               ... student_info(RollNo,StudName,DateofJoining,LastExamPercent)
+               ... VALUES (1,'Michael Storm','2012-03-29', 69.6)
+               ... INSERT INTO student_info
+               ... (RollNo,StudName,DateofJoining,LastExamPercent) VALUES
+               ... (2,'Stephen Fox','2013-02-27', 72.5)
+               ... APPLY BATCH;
+InvalidRequest: Error from server: code=2200 [Invalid query] message="Undefined column name dateofjoining"
+cqlsh:newstudents> BEGIN BATCH INSERT INTO student_info(RollNo,StudName,DateofJoining,LastExamPercent) VALUES (1,'Michael Storm','2012-03-29',69.6) INSERT INTO student_info (RollNo,StudName,DateofJoining,LastExamPercent) VALUES (2,'Stephen Fox','2013-02-27',72.5) APPLY BATCH;
+InvalidRequest: Error from server: code=2200 [Invalid query] message="Undefined column name dateofjoining"
+cqlsh:newstudents> BEGIN BATCH INSERT INTO student_info(RollNo,StudName,DateofJoning,LastExamPercent) VALUES (1,'Michael Storm','2012-03-29',69.6) INSERT INTO student_info (RollNo,StudName,DateofJoning,LastExamPercent) VALUES (2,'Stephen Fox','2013-02-27',72.5) APPLY BATCH;
+cqlsh:newstudents> select * from Student_Info;
+
+ rollno | dateofjoning                    | lastexampercent | studname
+--------+---------------------------------+-----------------+---------------
+      1 | 2012-03-28 18:30:00.000000+0000 |            69.6 | Michael Storm
+      2 | 2013-02-26 18:30:00.000000+0000 |            72.5 |   Stephen Fox
+
+(2 rows)
+cqlsh:newstudents> UPDATE Student_Info SET StudName='David Sheen' WHERE RollNo = 2;
+cqlsh:newstudents> SELECT FROM Student_Info WHERE RollNo in (1,2,3);
+SyntaxException: line 1:7 no viable alternative at input 'FROM' (SELECT [FROM]...)
+cqlsh:newstudents> SELECT *  FROM Student_Info WHERE RollNo in (1,2,3);
+
+ rollno | dateofjoning                    | lastexampercent | studname
+--------+---------------------------------+-----------------+---------------
+      1 | 2012-03-28 18:30:00.000000+0000 |            69.6 | Michael Storm
+      2 | 2013-02-26 18:30:00.000000+0000 |            72.5 |   David Sheen
+
+(2 rows)
+cqlsh:newstudents> CREATE INDEX ON STUDENT_Info(studname);
+cqlsh:newstudents> SELECT * FROM student_info WHERE studName='Stephen Fox';
+
+ rollno | dateofjoning | lastexampercent | studname
+--------+--------------+-----------------+----------
+
+(0 rows)
+cqlsh:newstudents> CREATE INDEX ON Student_Info(LastExamPercent);
+cqlsh:newstudents> SELECT RollNo, LastExamPercent FROM Student_info LIMIT 2;
+
+ rollno | lastexampercent
+--------+-----------------
+      1 |            69.6
+      2 |            72.5
+
+(2 rows)
+cqlsh:newstudents> SELECT RollNo,StudName AS "Name
+               ... " FROM Student_Info;
+
+ rollno | Name\n
+--------+---------------
+      1 | Michael Storm
+      2 |   David Sheen
+
+(2 rows)
+cqlsh:newstudents> SELECT RollNo,StudName AS "Name" FROM Student_Info;
+
+ rollno | Name
+--------+---------------
+      1 | Michael Storm
+      2 |   David Sheen
+
+(2 rows)
+cqlsh:newstudents> UPDATE Student_Info SET StudName="Samaira",LastExamPercent=85.7 WHERE RollNo=2;
+SyntaxException: line 1:42 no viable alternative at input ',' (UPDATE Student_Info SET StudName=["Samair]a",...)
+cqlsh:newstudents> UPDATE Student_Info SET StudName="Samaira" and LastExamPercent=85.7 WHERE RollNo=2;
+SyntaxException: line 1:43 no viable alternative at input 'and' (UPDATE Student_Info SET StudName=["Samair]a" and...)
+cqlsh:newstudents> UPDATE Student_Info SET StudName='Samaira',LastExamPercent=85.7 WHERE RollNo=2;
+cqlsh:newstudents> SELECT RollNo, sTUDnAME, LastExamPercent FROM StudentInfo where RollNo=2
+               ... 
+cqlsh:newstudents> SELECT RollNo, StudName, LastExamPercent FROM Student_Info where RollNo=2
+               ... ;
+
+ rollno | studname | lastexampercent
+--------+----------+-----------------
+      2 |  Samaira |            85.7
+
+(1 rows)
+cqlsh:newstudents> DELETE LastExamPercent FROM Student_Info WHERE RollNo=2;
+cqlsh:newstudents> SELECT * FROM StudentInfo where RollNo=2l
+               ... 
+cqlsh:newstudents> 
+cqlsh:newstudents> SELECT * FROM StudentInfo where RollNo=2;
+InvalidRequest: Error from server: code=2200 [Invalid query] message="unconfigured table studentinfo"
+cqlsh:newstudents> SELECT * FROM Student_Info where RollNo=2;
+
+ rollno | dateofjoning                    | lastexampercent | studname
+--------+---------------------------------+-----------------+----------
+      2 | 2013-02-26 18:30:00.000000+0000 |            null |  Samaira
+
+(1 rows)
+cqlsh:newstudents> DELETE FROM Student_Info WHERE RollNo=2;
+cqlsh:newstudents> SELECT * FROM Studentinfo where RollNo=2;
+InvalidRequest: Error from server: code=2200 [Invalid query] message="unconfigured table studentinfo"
+cqlsh:newstudents> SELECT * FROM Student_Info where RollNo=2;
+
+ rollno | dateofjoning | lastexampercent | studname
+--------+--------------+-----------------+----------
+
+(0 rows)
+
