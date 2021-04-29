@@ -1,0 +1,235 @@
+hduser@ubuntu:~$ start-all.sh
+This script is Deprecated. Instead use start-dfs.sh and start-yarn.sh
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by org.apache.hadoop.security.authentication.util.KerberosUtil (file:/usr/local/hadoop/share/hadoop/common/lib/hadoop-auth-2.6.0.jar) to method sun.security.krb5.Config.getInstance()
+WARNING: Please consider reporting this to the maintainers of org.apache.hadoop.security.authentication.util.KerberosUtil
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+21/04/29 18:03:48 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Starting namenodes on [localhost]
+hduser@localhost's password: 
+localhost: starting namenode, logging to /usr/local/hadoop/logs/hadoop-hduser-namenode-ubuntu.out
+hduser@localhost's password: 
+localhost: starting datanode, logging to /usr/local/hadoop/logs/hadoop-hduser-datanode-ubuntu.out
+Starting secondary namenodes [0.0.0.0]
+hduser@0.0.0.0's password: 
+0.0.0.0: starting secondarynamenode, logging to /usr/local/hadoop/logs/hadoop-hduser-secondarynamenode-ubuntu.out
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by org.apache.hadoop.security.authentication.util.KerberosUtil (file:/usr/local/hadoop/share/hadoop/common/lib/hadoop-auth-2.6.0.jar) to method sun.security.krb5.Config.getInstance()
+WARNING: Please consider reporting this to the maintainers of org.apache.hadoop.security.authentication.util.KerberosUtil
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+21/04/29 18:04:36 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+starting yarn daemons
+starting resourcemanager, logging to /usr/local/hadoop/logs/yarn-hduser-resourcemanager-ubuntu.out
+hduser@localhost's password: 
+localhost: starting nodemanager, logging to /usr/local/hadoop/logs/yarn-hduser-nodemanager-ubuntu.out
+hduser@ubuntu:~$ jps
+16240 SecondaryNameNode
+16387 ResourceManager
+16613 NodeManager
+16741 Jps
+15880 NameNode
+16044 DataNode
+hduser@ubuntu:~$ hdfs dfs -ls /
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by org.apache.hadoop.security.authentication.util.KerberosUtil (file:/usr/local/hadoop/share/hadoop/common/lib/hadoop-auth-2.6.0.jar) to method sun.security.krb5.Config.getInstance()
+WARNING: Please consider reporting this to the maintainers of org.apache.hadoop.security.authentication.util.KerberosUtil
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+21/04/29 18:05:01 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+hduser@ubuntu:~$ update-alternatives --config java
+There are 2 choices for the alternative java (providing /usr/bin/java).
+
+  Selection    Path                                            Priority   Status
+------------------------------------------------------------
+* 0            /usr/lib/jvm/java-11-openjdk-amd64/bin/java      1111      auto mode
+  1            /usr/lib/jvm/java-11-openjdk-amd64/bin/java      1111      manual mode
+  2            /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java   1081      manual mode
+
+Press <enter> to keep the current choice[*], or type selection number: 2
+update-alternatives: using /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java to provide /usr/bin/java (java) in manual mode
+hduser@ubuntu:~$ source ~/.bashrc
+hduser@ubuntu:~$ sudo nano ~/.bashrc
+hduser@ubuntu:~$ source ~/.bashrc
+hduser@ubuntu:~$ sudo nano /usr/local/hadoop/etc/hadoop/hadoop-env.sh
+hduser@ubuntu:~$ hdfs dfs -ls /
+21/04/29 18:07:21 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+hduser@ubuntu:~$ sudo nano ~/.bashrc
+hduser@ubuntu:~$ sudo chmod -R 777 /home/hduser/hadoop-2.6.0
+hduser@ubuntu:~$ jps
+17120 Jps
+16240 SecondaryNameNode
+16387 ResourceManager
+16613 NodeManager
+15880 NameNode
+16044 DataNode
+hduser@ubuntu:~$ hdfs dfs -ls /
+21/04/29 18:19:15 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+hduser@ubuntu:~$ cd /usr/local/hadoop
+hduser@ubuntu:/usr/local/hadoop$ cd lib
+hduser@ubuntu:/usr/local/hadoop/lib$ ls
+native
+hduser@ubuntu:/usr/local/hadoop/lib$ cd native
+hduser@ubuntu:/usr/local/hadoop/lib/native$ ls
+libhadoop.a  libhadooppipes.a  libhadoop.so  libhadoop.so.1.0.0  libhadooputils.a  libhdfs.a  libhdfs.so  libhdfs.so.0.0.0
+hduser@ubuntu:/usr/local/hadoop/lib/native$ cd\
+> 
+hduser@ubuntu:~$ hdfs fs -mkdir /pranav
+Error: Could not find or load main class fs
+hduser@ubuntu:~$ hadoop fs -mkdir /pranav
+21/04/29 18:28:48 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+hduser@ubuntu:~$ hadoop fs -ls /
+21/04/29 18:29:05 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Found 1 items
+drwxr-xr-x   - hduser supergroup          0 2021-04-29 18:28 /pranav
+hduser@ubuntu:~$ hadoop fs -copyFromLocal /home/hduser/Desktop/text1.txt /pranav/file1.txt
+21/04/29 18:37:13 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+copyFromLocal: `/home/hduser/Desktop/text1.txt': No such file or directory
+hduser@ubuntu:~$ hadoop fs -copyFromLocal /home/hduser/Desktop/text1.txt /pranav
+21/04/29 18:38:43 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+copyFromLocal: `/home/hduser/Desktop/text1.txt': No such file or directory
+hduser@ubuntu:~$ hadoop fs -copyFromLocal ~/text2.txt /pranav
+21/04/29 18:40:40 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+copyFromLocal: `/home/hduser/text2.txt': No such file or directory
+hduser@ubuntu:~$ hadoop fs -copyFromLocal ~/text1.txt /pranav
+21/04/29 18:42:02 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+hduser@ubuntu:~$ hadoop fs -ls /pranav
+21/04/29 18:42:25 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Found 1 items
+-rw-r--r--   1 hduser supergroup         90 2021-04-29 18:42 /pranav/text1.txt
+hduser@ubuntu:~$ hadoop fs -count -e /pranav/text1.txt
+-count: Illegal option -e
+Usage: hadoop fs [generic options] -count [-q] [-h] <path> ...
+hduser@ubuntu:~$ hadoop jar /home/rekhags/Desktop/WordCount.jar
+Not a valid JAR: /home/rekhags/Desktop/WordCount.jar
+hduser@ubuntu:~$ wordcount.WordCount(.class file name which is created in jar)
+bash: syntax error near unexpected token `.class'
+hduser@ubuntu:~$ /rgs/test.txt /output/(
+bash: syntax error near unexpected token `('
+hduser@ubuntu:~$ hadoop jar /home/rekhags/Desktop/WordCount.jar
+Not a valid JAR: /home/rekhags/Desktop/WordCount.jar
+hduser@ubuntu:~$ wordcount.WordCount(.class file name which is created in jar)
+bash: syntax error near unexpected token `.class'
+hduser@ubuntu:~$ /rgs/test.txt /output/(To run the jar file)
+bash: syntax error near unexpected token `('
+hduser@ubuntu:~$ hadoop.jarhadoop jar /home/rekhags/Desktop/WordCount.jar /rgs/test.txt /output/(To run the jar file)
+bash: syntax error near unexpected token `('
+hduser@ubuntu:~$ wordcount.WordCount(.class file name which is created in jar)
+bash: syntax error near unexpected token `.class'
+hduser@ubuntu:~$ /rgs/test.txt /output/(To run the jar file)
+bash: syntax error near unexpected token `('
+hduser@ubuntu:~$ hadoop jar /home/hduser/Desktop/WordCount.jar wordcount.WordCount /hduser/text1.txt /output/
+Not a valid JAR: /home/hduser/Desktop/WordCount.jar
+hduser@ubuntu:~$ hadoop jar /home/hduser/Desktop/WordCount.jar wordcount.wordcount /hduser/text1.txt /output/
+Not a valid JAR: /home/hduser/Desktop/WordCount.jar
+hduser@ubuntu:~$ hadoop jar /home/hduser/Desktop/WordCount.jar wordcount.wordcount /home/hduser/text1.txt /output/
+Not a valid JAR: /home/hduser/Desktop/WordCount.jar
+hduser@ubuntu:~$ hadoop jar /home/hduser/Desktop/wordcount.jar wordcount.wordcount /home/hduser/text1.txt /output/
+Exception in thread "main" java.lang.ClassNotFoundException: wordcount.wordcount
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:382)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:418)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:351)
+	at java.lang.Class.forName0(Native Method)
+	at java.lang.Class.forName(Class.java:348)
+	at org.apache.hadoop.util.RunJar.run(RunJar.java:214)
+	at org.apache.hadoop.util.RunJar.main(RunJar.java:136)
+hduser@ubuntu:~$ hadoop fs -count -e /pranav/text.txt
+-count: Illegal option -e
+Usage: hadoop fs [generic options] -count [-q] [-h] <path> ...
+hduser@ubuntu:~$ hadoop fs -count -e /pranav/text1.txt
+-count: Illegal option -e
+Usage: hadoop fs [generic options] -count [-q] [-h] <path> ...
+hduser@ubuntu:~$ cd /usr/local/hadoop/sbin
+hduser@ubuntu:/usr/local/hadoop/sbin$ ls
+distribute-exclude.sh  hdfs-config.cmd  kms.sh                   slaves.sh      start-balancer.sh  start-secure-dns.sh  stop-all.cmd      stop-dfs.cmd        stop-yarn.cmd   yarn-daemons.sh
+hadoop-daemon.sh       hdfs-config.sh   mr-jobhistory-daemon.sh  start-all.cmd  start-dfs.cmd      start-yarn.cmd       stop-all.sh       stop-dfs.sh         stop-yarn.sh
+hadoop-daemons.sh      httpfs.sh        refresh-namenodes.sh     start-all.sh   start-dfs.sh       start-yarn.sh        stop-balancer.sh  stop-secure-dns.sh  yarn-daemon.sh
+hduser@ubuntu:/usr/local/hadoop/sbin$ hadoop fs -count -e /pranav/text1.txt
+-count: Illegal option -e
+Usage: hadoop fs [generic options] -count [-q] [-h] <path> ...
+hduser@ubuntu:/usr/local/hadoop/sbin$ hadoop fs -count /pranav/text1.txt
+21/04/29 19:08:05 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+           0            1                 90 /pranav/text1.txt
+hduser@ubuntu:/usr/local/hadoop/sbin$ hdfs dfs -cat /pranav/text1.txt
+21/04/29 19:11:41 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+hi how are you
+how is your job
+how is your family
+how is your brother
+how is your sister
+
+hduser@ubuntu:/usr/local/hadoop/sbin$ hadoop fs -appendToFile ~/temp1.txt /pranav/text1.txt
+21/04/29 19:15:34 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+hduser@ubuntu:/usr/local/hadoop/sbin$ hadoop fs -appendToFile ~/temp1.txt /pranav/text1.txt
+21/04/29 19:16:20 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+hduser@ubuntu:/usr/local/hadoop/sbin$ hadoop fs -appendToFile /home/hduser/temp1.txt /pranav/text1.txt
+21/04/29 19:17:44 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+hduser@ubuntu:/usr/local/hadoop/sbin$ hdfs dfs -cat /pranav/temp1.txt
+21/04/29 19:18:37 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+cat: `/pranav/temp1.txt': No such file or directory
+hduser@ubuntu:/usr/local/hadoop/sbin$ hdfs dfs -cat /pranav/text1.txt
+21/04/29 19:19:05 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+hi how are you
+how is your job
+how is your family
+how is your brother
+how is your sister
+
+hi
+pranav
+pranav
+hduser@ubuntu:/usr/local/hadoop/sbin$ hadoop fs -appendToFile ~/temp2.txt /pranav/text1.txt
+21/04/29 20:34:29 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+appendToFile: /home/hduser/temp2.txt (No such file or directory)
+hduser@ubuntu:/usr/local/hadoop/sbin$ hadoop fs -appendToFile ~/temp1.txt /pranav/text1.txt
+21/04/29 20:34:56 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+hduser@ubuntu:/usr/local/hadoop/sbin$ hdfs dfs -cat /pranav/text1.txt
+21/04/29 20:36:16 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+hi how are you
+how is your job
+how is your family
+how is your brother
+how is your sister
+
+hi
+pranav
+pranav
+pranav
+hduser@ubuntu:/usr/local/hadoop/sbin$ hdfs dfs -mkdir /sample
+21/04/29 20:37:14 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+hduser@ubuntu:/usr/local/hadoop/sbin$ hdfs dfs -cp /pranav/temp1.txt  /sample/file1
+21/04/29 20:38:06 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+cp: `/pranav/temp1.txt': No such file or directory
+hduser@ubuntu:/usr/local/hadoop/sbin$ hdfs dfs -cp /pranav/text1.txt  /sample/file1
+21/04/29 20:38:25 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+hduser@ubuntu:/usr/local/hadoop/sbin$ hdfs dfs -cat /sample/file1
+21/04/29 20:38:45 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+hi how are you
+how is your job
+how is your family
+how is your brother
+how is your sister
+
+hi
+pranav
+pranav
+pranav
+hduser@ubuntu:/usr/local/hadoop/sbin$ hadoop fs -du -h -v /sample/file1
+-du: Illegal option -v
+Usage: hadoop fs [generic options] -du [-s] [-h] <path> ...
+hduser@ubuntu:/usr/local/hadoop/sbin$ hadoop fs -du -h -x /sample/file1
+-du: Illegal option -x
+Usage: hadoop fs [generic options] -du [-s] [-h] <path> ...
+hduser@ubuntu:/usr/local/hadoop/sbin$ hadoop fs -du -h -x /sample/copyfile
+-du: Illegal option -x
+Usage: hadoop fs [generic options] -du [-s] [-h] <path> ...
+hduser@ubuntu:/usr/local/hadoop/sbin$ gedit copyfile
+hduser@ubuntu:/usr/local/hadoop/sbin$ hadoop fs -du -h -x /sample/copyfile
+-du: Illegal option -x
+Usage: hadoop fs [generic options] -du [-s] [-h] <path> ...
+hduser@ubuntu:/usr/local/hadoop/sbin$ hadoop fs -mkdir /dataflair
+21/04/29 20:51:29 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+hduser@ubuntu:/usr/local/hadoop/sbin$ hadoop fs -mv /newDataFlair/temp/txt /dataflair
+21/04/29 20:53:16 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+mv: `/newDataFlair/temp/txt': No such file or directory
