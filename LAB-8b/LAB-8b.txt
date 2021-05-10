@@ -1,0 +1,314 @@
+hduser@ubuntu:~$ start-all.sh
+This script is Deprecated. Instead use start-dfs.sh and start-yarn.sh
+21/05/10 20:44:01 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Starting namenodes on [localhost]
+hduser@localhost's password: 
+localhost: namenode running as process 24696. Stop it first.
+hduser@localhost's password: 
+localhost: datanode running as process 3368. Stop it first.
+Starting secondary namenodes [0.0.0.0]
+hduser@0.0.0.0's password: 
+0.0.0.0: secondarynamenode running as process 24977. Stop it first.
+21/05/10 20:44:19 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+starting yarn daemons
+resourcemanager running as process 25107. Stop it first.
+hduser@localhost's password: 
+localhost: nodemanager running as process 25427. Stop it first.
+hduser@ubuntu:~$ jps
+24977 SecondaryNameNode
+26210 Jps
+25427 NodeManager
+25107 ResourceManager
+24696 NameNode
+3368 DataNode
+hduser@ubuntu:~$ hadoop fs -mkdir /temp_input
+21/05/10 21:10:17 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+hduser@ubuntu:~$ hadoop fs -put /home/hduser/Downloads/sample_temp.txt /temp_input
+21/05/10 21:14:18 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+hduser@ubuntu:~$ hadoop jar /home/hduser/Desktop/temperature.jar temperature.AverageDriver /temp_input/sample_temp.txt /temp_out2
+Exception in thread "main" java.lang.ClassNotFoundException: temperature.AverageDriver
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:382)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:418)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:351)
+	at java.lang.Class.forName0(Native Method)
+	at java.lang.Class.forName(Class.java:348)
+	at org.apache.hadoop.util.RunJar.run(RunJar.java:214)
+	at org.apache.hadoop.util.RunJar.main(RunJar.java:136)
+hduser@ubuntu:~$ hadoop jar /home/hduser/Desktop/temperature.jar temperature.MaxDriver /temp_input/sample_temp.txt /temp_out2
+Exception in thread "main" java.lang.ClassNotFoundException: temperature.MaxDriver
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:382)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:418)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:351)
+	at java.lang.Class.forName0(Native Method)
+	at java.lang.Class.forName(Class.java:348)
+	at org.apache.hadoop.util.RunJar.run(RunJar.java:214)
+	at org.apache.hadoop.util.RunJar.main(RunJar.java:136)
+hduser@ubuntu:~$ hadoop jar /home/hduser/Desktop/temperature.jar tempMax.MaxDriver /temp_input/sample_temp.txt /temp_out2
+21/05/10 21:25:20 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+21/05/10 21:25:21 INFO Configuration.deprecation: session.id is deprecated. Instead, use dfs.metrics.session-id
+21/05/10 21:25:21 INFO jvm.JvmMetrics: Initializing JVM Metrics with processName=JobTracker, sessionId=
+21/05/10 21:25:21 WARN mapreduce.JobSubmitter: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+21/05/10 21:25:21 INFO input.FileInputFormat: Total input paths to process : 1
+21/05/10 21:25:21 INFO mapreduce.JobSubmitter: number of splits:1
+21/05/10 21:25:22 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_local1620865041_0001
+21/05/10 21:25:22 INFO mapreduce.Job: The url to track the job: http://localhost:8080/
+21/05/10 21:25:22 INFO mapreduce.Job: Running job: job_local1620865041_0001
+21/05/10 21:25:22 INFO mapred.LocalJobRunner: OutputCommitter set in config null
+21/05/10 21:25:22 INFO mapred.LocalJobRunner: OutputCommitter is org.apache.hadoop.mapreduce.lib.output.FileOutputCommitter
+21/05/10 21:25:22 INFO mapred.LocalJobRunner: Waiting for map tasks
+21/05/10 21:25:22 INFO mapred.LocalJobRunner: Starting task: attempt_local1620865041_0001_m_000000_0
+21/05/10 21:25:22 INFO mapred.Task:  Using ResourceCalculatorProcessTree : [ ]
+21/05/10 21:25:22 INFO mapred.MapTask: Processing split: hdfs://localhost:54310/temp_input/sample_temp.txt:0+533
+21/05/10 21:25:23 INFO mapred.MapTask: (EQUATOR) 0 kvi 26214396(104857584)
+21/05/10 21:25:23 INFO mapred.MapTask: mapreduce.task.io.sort.mb: 100
+21/05/10 21:25:23 INFO mapred.MapTask: soft limit at 83886080
+21/05/10 21:25:23 INFO mapred.MapTask: bufstart = 0; bufvoid = 104857600
+21/05/10 21:25:23 INFO mapred.MapTask: kvstart = 26214396; length = 6553600
+21/05/10 21:25:23 INFO mapred.MapTask: Map output collector class = org.apache.hadoop.mapred.MapTask$MapOutputBuffer
+21/05/10 21:25:23 INFO mapred.LocalJobRunner: 
+21/05/10 21:25:23 INFO mapred.MapTask: Starting flush of map output
+21/05/10 21:25:23 INFO mapred.MapTask: Spilling map output
+21/05/10 21:25:23 INFO mapred.MapTask: bufstart = 0; bufend = 35; bufvoid = 104857600
+21/05/10 21:25:23 INFO mapred.MapTask: kvstart = 26214396(104857584); kvend = 26214380(104857520); length = 17/6553600
+21/05/10 21:25:23 INFO mapred.MapTask: Finished spill 0
+21/05/10 21:25:23 INFO mapred.Task: Task:attempt_local1620865041_0001_m_000000_0 is done. And is in the process of committing
+21/05/10 21:25:23 INFO mapred.LocalJobRunner: map
+21/05/10 21:25:23 INFO mapred.Task: Task 'attempt_local1620865041_0001_m_000000_0' done.
+21/05/10 21:25:23 INFO mapred.LocalJobRunner: Finishing task: attempt_local1620865041_0001_m_000000_0
+21/05/10 21:25:23 INFO mapred.LocalJobRunner: map task executor complete.
+21/05/10 21:25:23 INFO mapred.LocalJobRunner: Waiting for reduce tasks
+21/05/10 21:25:23 INFO mapred.LocalJobRunner: Starting task: attempt_local1620865041_0001_r_000000_0
+21/05/10 21:25:23 INFO mapred.Task:  Using ResourceCalculatorProcessTree : [ ]
+21/05/10 21:25:23 INFO mapred.ReduceTask: Using ShuffleConsumerPlugin: org.apache.hadoop.mapreduce.task.reduce.Shuffle@7d60c270
+21/05/10 21:25:23 INFO reduce.MergeManagerImpl: MergerManager: memoryLimit=334338464, maxSingleShuffleLimit=83584616, mergeThreshold=220663392, ioSortFactor=10, memToMemMergeOutputsThreshold=10
+21/05/10 21:25:23 INFO reduce.EventFetcher: attempt_local1620865041_0001_r_000000_0 Thread started: EventFetcher for fetching Map Completion Events
+21/05/10 21:25:23 INFO mapreduce.Job: Job job_local1620865041_0001 running in uber mode : false
+21/05/10 21:25:23 INFO mapreduce.Job:  map 100% reduce 0%
+21/05/10 21:25:23 INFO reduce.LocalFetcher: localfetcher#1 about to shuffle output of map attempt_local1620865041_0001_m_000000_0 decomp: 47 len: 51 to MEMORY
+21/05/10 21:25:23 INFO reduce.InMemoryMapOutput: Read 47 bytes from map-output for attempt_local1620865041_0001_m_000000_0
+21/05/10 21:25:23 INFO reduce.MergeManagerImpl: closeInMemoryFile -> map-output of size: 47, inMemoryMapOutputs.size() -> 1, commitMemory -> 0, usedMemory ->47
+21/05/10 21:25:23 INFO reduce.EventFetcher: EventFetcher is interrupted.. Returning
+21/05/10 21:25:23 INFO mapred.LocalJobRunner: 1 / 1 copied.
+21/05/10 21:25:23 INFO reduce.MergeManagerImpl: finalMerge called with 1 in-memory map-outputs and 0 on-disk map-outputs
+21/05/10 21:25:23 INFO mapred.Merger: Merging 1 sorted segments
+21/05/10 21:25:23 INFO mapred.Merger: Down to the last merge-pass, with 1 segments left of total size: 42 bytes
+21/05/10 21:25:23 INFO reduce.MergeManagerImpl: Merged 1 segments, 47 bytes to disk to satisfy reduce memory limit
+21/05/10 21:25:23 INFO reduce.MergeManagerImpl: Merging 1 files, 51 bytes from disk
+21/05/10 21:25:23 INFO reduce.MergeManagerImpl: Merging 0 segments, 0 bytes from memory into reduce
+21/05/10 21:25:23 INFO mapred.Merger: Merging 1 sorted segments
+21/05/10 21:25:23 INFO mapred.Merger: Down to the last merge-pass, with 1 segments left of total size: 42 bytes
+21/05/10 21:25:23 INFO mapred.LocalJobRunner: 1 / 1 copied.
+21/05/10 21:25:23 INFO Configuration.deprecation: mapred.skip.on is deprecated. Instead, use mapreduce.job.skiprecords
+21/05/10 21:25:23 INFO mapred.Task: Task:attempt_local1620865041_0001_r_000000_0 is done. And is in the process of committing
+21/05/10 21:25:23 INFO mapred.LocalJobRunner: 1 / 1 copied.
+21/05/10 21:25:23 INFO mapred.Task: Task attempt_local1620865041_0001_r_000000_0 is allowed to commit now
+21/05/10 21:25:23 INFO output.FileOutputCommitter: Saved output of task 'attempt_local1620865041_0001_r_000000_0' to hdfs://localhost:54310/temp_out2/_temporary/0/task_local1620865041_0001_r_000000
+21/05/10 21:25:23 INFO mapred.LocalJobRunner: reduce > reduce
+21/05/10 21:25:23 INFO mapred.Task: Task 'attempt_local1620865041_0001_r_000000_0' done.
+21/05/10 21:25:23 INFO mapred.LocalJobRunner: Finishing task: attempt_local1620865041_0001_r_000000_0
+21/05/10 21:25:23 INFO mapred.LocalJobRunner: reduce task executor complete.
+21/05/10 21:25:24 INFO mapreduce.Job:  map 100% reduce 100%
+21/05/10 21:25:24 INFO mapreduce.Job: Job job_local1620865041_0001 completed successfully
+21/05/10 21:25:24 INFO mapreduce.Job: Counters: 38
+	File System Counters
+		FILE: Number of bytes read=7720
+		FILE: Number of bytes written=507973
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=1066
+		HDFS: Number of bytes written=13
+		HDFS: Number of read operations=13
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=4
+	Map-Reduce Framework
+		Map input records=5
+		Map output records=5
+		Map output bytes=35
+		Map output materialized bytes=51
+		Input split bytes=114
+		Combine input records=0
+		Combine output records=0
+		Reduce input groups=2
+		Reduce shuffle bytes=51
+		Reduce input records=5
+		Reduce output records=2
+		Spilled Records=10
+		Shuffled Maps =1
+		Failed Shuffles=0
+		Merged Map outputs=1
+		GC time elapsed (ms)=118
+		CPU time spent (ms)=0
+		Physical memory (bytes) snapshot=0
+		Virtual memory (bytes) snapshot=0
+		Total committed heap usage (bytes)=359137280
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=533
+	File Output Format Counters 
+		Bytes Written=13
+hduser@ubuntu:~$ hadoop fs -cat /temp_out2/*
+21/05/10 21:27:39 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+03	111
+05	22
+hduser@ubuntu:~$ hadoophadoop jar /home/hduser/Desktop/temperature.jar tempMax.MaxDriver /temp_input/temp.txt /temp_out4
+hadoophadoop: command not found
+hduser@ubuntu:~$ hadoop jar /home/hduser/Desktop/temperature.jar tempMax.MaxDriver /temp_input/temp.txt /temp_out4
+21/05/10 21:36:06 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+21/05/10 21:36:07 INFO Configuration.deprecation: session.id is deprecated. Instead, use dfs.metrics.session-id
+21/05/10 21:36:07 INFO jvm.JvmMetrics: Initializing JVM Metrics with processName=JobTracker, sessionId=
+21/05/10 21:36:08 WARN mapreduce.JobSubmitter: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+21/05/10 21:36:08 INFO mapreduce.JobSubmitter: Cleaning up the staging area file:/app/hadoop/tmp/mapred/staging/hduser265187374/.staging/job_local265187374_0001
+Exception in thread "main" org.apache.hadoop.mapreduce.lib.input.InvalidInputException: Input path does not exist: hdfs://localhost:54310/temp_input/temp.txt
+	at org.apache.hadoop.mapreduce.lib.input.FileInputFormat.singleThreadedListStatus(FileInputFormat.java:321)
+	at org.apache.hadoop.mapreduce.lib.input.FileInputFormat.listStatus(FileInputFormat.java:264)
+	at org.apache.hadoop.mapreduce.lib.input.FileInputFormat.getSplits(FileInputFormat.java:385)
+	at org.apache.hadoop.mapreduce.JobSubmitter.writeNewSplits(JobSubmitter.java:597)
+	at org.apache.hadoop.mapreduce.JobSubmitter.writeSplits(JobSubmitter.java:614)
+	at org.apache.hadoop.mapreduce.JobSubmitter.submitJobInternal(JobSubmitter.java:492)
+	at org.apache.hadoop.mapreduce.Job$10.run(Job.java:1296)
+	at org.apache.hadoop.mapreduce.Job$10.run(Job.java:1293)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at javax.security.auth.Subject.doAs(Subject.java:422)
+	at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1628)
+	at org.apache.hadoop.mapreduce.Job.submit(Job.java:1293)
+	at org.apache.hadoop.mapreduce.Job.waitForCompletion(Job.java:1314)
+	at tempMax.MaxDriver.main(MaxDriver.java:28)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.hadoop.util.RunJar.run(RunJar.java:221)
+	at org.apache.hadoop.util.RunJar.main(RunJar.java:136)
+hduser@ubuntu:~$ hadoop jar /home/hduser/Desktop/temperature.jar tempMax.MaxDriver /temperature_input/temp.txt /temp_out4
+21/05/10 21:40:54 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+21/05/10 21:40:54 INFO Configuration.deprecation: session.id is deprecated. Instead, use dfs.metrics.session-id
+21/05/10 21:40:54 INFO jvm.JvmMetrics: Initializing JVM Metrics with processName=JobTracker, sessionId=
+21/05/10 21:40:55 WARN mapreduce.JobSubmitter: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+21/05/10 21:40:55 INFO input.FileInputFormat: Total input paths to process : 1
+21/05/10 21:40:55 INFO mapreduce.JobSubmitter: number of splits:1
+21/05/10 21:40:55 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_local1729501984_0001
+21/05/10 21:40:55 INFO mapreduce.Job: The url to track the job: http://localhost:8080/
+21/05/10 21:40:55 INFO mapreduce.Job: Running job: job_local1729501984_0001
+21/05/10 21:40:55 INFO mapred.LocalJobRunner: OutputCommitter set in config null
+21/05/10 21:40:55 INFO mapred.LocalJobRunner: OutputCommitter is org.apache.hadoop.mapreduce.lib.output.FileOutputCommitter
+21/05/10 21:40:55 INFO mapred.LocalJobRunner: Waiting for map tasks
+21/05/10 21:40:55 INFO mapred.LocalJobRunner: Starting task: attempt_local1729501984_0001_m_000000_0
+21/05/10 21:40:56 INFO mapred.Task:  Using ResourceCalculatorProcessTree : [ ]
+21/05/10 21:40:56 INFO mapred.MapTask: Processing split: hdfs://localhost:54310/temperature_input/temp.txt:0+894755
+21/05/10 21:40:56 INFO mapred.MapTask: (EQUATOR) 0 kvi 26214396(104857584)
+21/05/10 21:40:56 INFO mapred.MapTask: mapreduce.task.io.sort.mb: 100
+21/05/10 21:40:56 INFO mapred.MapTask: soft limit at 83886080
+21/05/10 21:40:56 INFO mapred.MapTask: bufstart = 0; bufvoid = 104857600
+21/05/10 21:40:56 INFO mapred.MapTask: kvstart = 26214396; length = 6553600
+21/05/10 21:40:56 INFO mapred.MapTask: Map output collector class = org.apache.hadoop.mapred.MapTask$MapOutputBuffer
+21/05/10 21:40:56 INFO mapreduce.Job: Job job_local1729501984_0001 running in uber mode : false
+21/05/10 21:40:56 INFO mapreduce.Job:  map 0% reduce 0%
+21/05/10 21:40:58 INFO mapred.LocalJobRunner: 
+21/05/10 21:40:58 INFO mapred.MapTask: Starting flush of map output
+21/05/10 21:40:58 INFO mapred.MapTask: Spilling map output
+21/05/10 21:40:58 INFO mapred.MapTask: bufstart = 0; bufend = 45948; bufvoid = 104857600
+21/05/10 21:40:58 INFO mapred.MapTask: kvstart = 26214396(104857584); kvend = 26188144(104752576); length = 26253/6553600
+21/05/10 21:40:59 INFO mapred.MapTask: Finished spill 0
+21/05/10 21:40:59 INFO mapred.Task: Task:attempt_local1729501984_0001_m_000000_0 is done. And is in the process of committing
+21/05/10 21:40:59 INFO mapred.LocalJobRunner: map
+21/05/10 21:40:59 INFO mapred.Task: Task 'attempt_local1729501984_0001_m_000000_0' done.
+21/05/10 21:40:59 INFO mapred.LocalJobRunner: Finishing task: attempt_local1729501984_0001_m_000000_0
+21/05/10 21:40:59 INFO mapred.LocalJobRunner: map task executor complete.
+21/05/10 21:40:59 INFO mapred.LocalJobRunner: Waiting for reduce tasks
+21/05/10 21:40:59 INFO mapred.LocalJobRunner: Starting task: attempt_local1729501984_0001_r_000000_0
+21/05/10 21:40:59 INFO mapred.Task:  Using ResourceCalculatorProcessTree : [ ]
+21/05/10 21:40:59 INFO mapred.ReduceTask: Using ShuffleConsumerPlugin: org.apache.hadoop.mapreduce.task.reduce.Shuffle@54ca3c47
+21/05/10 21:40:59 INFO mapreduce.Job:  map 100% reduce 0%
+21/05/10 21:41:00 INFO reduce.MergeManagerImpl: MergerManager: memoryLimit=334338464, maxSingleShuffleLimit=83584616, mergeThreshold=220663392, ioSortFactor=10, memToMemMergeOutputsThreshold=10
+21/05/10 21:41:00 INFO reduce.EventFetcher: attempt_local1729501984_0001_r_000000_0 Thread started: EventFetcher for fetching Map Completion Events
+21/05/10 21:41:00 INFO reduce.LocalFetcher: localfetcher#1 about to shuffle output of map attempt_local1729501984_0001_m_000000_0 decomp: 59078 len: 59082 to MEMORY
+21/05/10 21:41:00 INFO reduce.InMemoryMapOutput: Read 59078 bytes from map-output for attempt_local1729501984_0001_m_000000_0
+21/05/10 21:41:00 INFO reduce.MergeManagerImpl: closeInMemoryFile -> map-output of size: 59078, inMemoryMapOutputs.size() -> 1, commitMemory -> 0, usedMemory ->59078
+21/05/10 21:41:00 INFO reduce.EventFetcher: EventFetcher is interrupted.. Returning
+21/05/10 21:41:00 INFO mapred.LocalJobRunner: 1 / 1 copied.
+21/05/10 21:41:00 INFO reduce.MergeManagerImpl: finalMerge called with 1 in-memory map-outputs and 0 on-disk map-outputs
+21/05/10 21:41:00 INFO mapred.Merger: Merging 1 sorted segments
+21/05/10 21:41:00 INFO mapred.Merger: Down to the last merge-pass, with 1 segments left of total size: 59073 bytes
+21/05/10 21:41:00 INFO reduce.MergeManagerImpl: Merged 1 segments, 59078 bytes to disk to satisfy reduce memory limit
+21/05/10 21:41:00 INFO reduce.MergeManagerImpl: Merging 1 files, 59082 bytes from disk
+21/05/10 21:41:00 INFO reduce.MergeManagerImpl: Merging 0 segments, 0 bytes from memory into reduce
+21/05/10 21:41:00 INFO mapred.Merger: Merging 1 sorted segments
+21/05/10 21:41:00 INFO mapred.Merger: Down to the last merge-pass, with 1 segments left of total size: 59073 bytes
+21/05/10 21:41:00 INFO mapred.LocalJobRunner: 1 / 1 copied.
+21/05/10 21:41:00 INFO Configuration.deprecation: mapred.skip.on is deprecated. Instead, use mapreduce.job.skiprecords
+21/05/10 21:41:01 INFO mapred.Task: Task:attempt_local1729501984_0001_r_000000_0 is done. And is in the process of committing
+21/05/10 21:41:01 INFO mapred.LocalJobRunner: 1 / 1 copied.
+21/05/10 21:41:01 INFO mapred.Task: Task attempt_local1729501984_0001_r_000000_0 is allowed to commit now
+21/05/10 21:41:01 INFO output.FileOutputCommitter: Saved output of task 'attempt_local1729501984_0001_r_000000_0' to hdfs://localhost:54310/temp_out4/_temporary/0/task_local1729501984_0001_r_000000
+21/05/10 21:41:01 INFO mapred.LocalJobRunner: reduce > reduce
+21/05/10 21:41:01 INFO mapred.Task: Task 'attempt_local1729501984_0001_r_000000_0' done.
+21/05/10 21:41:01 INFO mapred.LocalJobRunner: Finishing task: attempt_local1729501984_0001_r_000000_0
+21/05/10 21:41:01 INFO mapred.LocalJobRunner: reduce task executor complete.
+21/05/10 21:41:01 INFO mapreduce.Job:  map 100% reduce 100%
+21/05/10 21:41:01 INFO mapreduce.Job: Job job_local1729501984_0001 completed successfully
+21/05/10 21:41:01 INFO mapreduce.Job: Counters: 38
+	File System Counters
+		FILE: Number of bytes read=125784
+		FILE: Number of bytes written=685068
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=1789510
+		HDFS: Number of bytes written=80
+		HDFS: Number of read operations=13
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=4
+	Map-Reduce Framework
+		Map input records=6565
+		Map output records=6564
+		Map output bytes=45948
+		Map output materialized bytes=59082
+		Input split bytes=114
+		Combine input records=0
+		Combine output records=0
+		Reduce input groups=12
+		Reduce shuffle bytes=59082
+		Reduce input records=6564
+		Reduce output records=12
+		Spilled Records=13128
+		Shuffled Maps =1
+		Failed Shuffles=0
+		Merged Map outputs=1
+		GC time elapsed (ms)=1445
+		CPU time spent (ms)=0
+		Physical memory (bytes) snapshot=0
+		Virtual memory (bytes) snapshot=0
+		Total committed heap usage (bytes)=778043392
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=894755
+	File Output Format Counters 
+		Bytes Written=80
+hduser@ubuntu:~$ hadoop fs -cat /temp_out4/*
+21/05/10 21:43:22 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+01	44
+02	17
+03	50
+04	194
+05	256
+06	278
+07	317
+08	283
+09	211
+10	156
+11	89
+12	117
+
